@@ -40,7 +40,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
       setState(() {
         user = _user;
       });
-      debugPrint('user=$_user');
+      //debugPrint('user=$_user');
       _initUserAndNotifications();
     });
   }
@@ -89,6 +89,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
     await readFromFile((update) => setState(update));
 
     bmi = weight / ((size / 100) * (size / 100));
+    bmi = bmi.isNaN ? 0 : bmi;
     if (bmi < 18.5) {
       bmiCategory = 'Zayıf';
     } else if (bmi >= 18.5 && bmi < 24.9) {

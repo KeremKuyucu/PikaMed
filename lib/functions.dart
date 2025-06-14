@@ -57,9 +57,9 @@ class Yazi {
     isEnglish = (selectedLanguage != 'Türkçe');
   }
 }
-String apiserver = "https://keremkk.glitch.me/pikamed";
+String apiserver = "https://pikamed-api.keremkk.com.tr/api/pikamed";
 
-String name = "", photoURL= "https://cdn.glitch.global/e74d89f5-045d-4ad2-94c7-e2c99ed95318/2815428.png?v=1738114346363",uid = '';
+String name = "", photoURL= "https://raw.githubusercontent.com/KeremKuyucu/PikaMed/main/assets/custom_profile.png",uid = '';
 String selectedLanguage='';
 bool isEnglish=false;
 final List<String> diller = ['Türkçe','English'];
@@ -173,8 +173,8 @@ Future<void> fetchUserData(Function updateState) async {
           .toList() ?? [];
     });
 
-    debugPrint("Veri başarıyla alındı");
-    writeToFile();
+    debugPrint("veri güncellendi");
+    await writeToFile();
   } else {
     // Hata durumu
     debugPrint("API isteği başarısız: ${response.statusCode}");
@@ -209,6 +209,10 @@ Future<void> resetAllData(Function updateState) async {
 }
 Future<void> postInfo() async {
   String? token = await AuthService().getIdToken();
+  if (token == null || token.isEmpty) {
+    debugPrint('Token yok, işlem iptal edildi.');
+    return; // Token yoksa fonksiyonu sonlandır
+  }
   notificationInfo();
   try {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();

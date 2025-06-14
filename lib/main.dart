@@ -82,11 +82,8 @@ class HexColor extends Color {
 }
 
 /*
-flutter build apk
-xcopy /Y /I "build\app\outputs\flutter-apk\app-release.apk" "C:\Users\Kerem\Desktop\PikaMed-Mobile.apk"
-
-
 flutter pub run flutter_launcher_icons:main
 
+flutter build apk --release --split-per-abi
 
  */

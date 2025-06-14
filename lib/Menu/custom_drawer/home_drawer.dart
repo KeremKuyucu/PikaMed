@@ -36,7 +36,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
       setState(() {
         user = _user;
       });
-      debugPrint('user=$_user');
     });
     setDrawerListArray();
   }

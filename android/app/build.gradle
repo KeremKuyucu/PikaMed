@@ -7,7 +7,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 
 dependencies {
-    implementation platform('com.google.firebase:firebase-bom:33.13.0')
+    implementation platform('com.google.firebase:firebase-bom:33.15.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.gms:play-services-auth:21.3.0'
     implementation 'com.google.firebase:firebase-auth:23.2.0'
@@ -38,15 +38,22 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-        coreLibraryDesugaringEnabled true // <-- DOĞRU ŞEKLİ BU
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+        coreLibraryDesugaringEnabled true
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = "17"
     }
-
+    splits {
+        abi {
+            enable true // ABI başına ayrı APK oluştur
+            reset()     // Varsayılan ayarları sıfırla
+            include 'armeabi-v7a', 'arm64-v8a', 'x86_64' // Desteklenecek mimariler
+            universalApk true // Tek bir evrensel APK oluşturma
+        }
+    }
     defaultConfig {
         applicationId "com.kk.pikamed"
         minSdk = 23

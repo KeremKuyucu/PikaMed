@@ -55,6 +55,7 @@ class AuthService {
   Future<void> signOut({required BuildContext context}) async {
     try {
       final user = _auth.currentUser;
+      await _logAuthAction("Çıkış");
 
       if (user != null) {
         name = "";
@@ -83,7 +84,6 @@ class AuthService {
         _showSnackBar(context, "Zaten giriş yapılmamış.");
       }
 
-      await _logAuthAction("Çıkış");
       await _auth.signOut();
 
 

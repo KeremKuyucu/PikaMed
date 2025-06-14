@@ -27,6 +27,10 @@ class _CenterNextButtonState extends State<CenterNextButton> {
     user = fetchedUser;
     if (user != null) {
       debugPrint('Google ile giriş başarılı: ${user.displayName}');
+      name = user.providerData.first.displayName!;
+      uid = user.uid;
+      photoURL = user.photoURL ?? "";
+      await writeToFile();
       await fetchUserData((update) => setState(update));
       Navigator.pushReplacement(
         context,
