@@ -153,7 +153,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
 
         if (data.isNotEmpty) {
           final latestRelease = data[0];
-          String remoteVersion = latestRelease['tag_name'] ?? 'N/A';
+          String? remoteVersion = (latestRelease['tag_name'] as String?)?.replaceFirst(RegExp(r'^v'), '');
           String updateNotes = latestRelease['body'] ?? 'Yama notları mevcut değil';
 
           String html = md.markdownToHtml(updateNotes);
